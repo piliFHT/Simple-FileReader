@@ -68,7 +68,7 @@ public partial class MainPage : ContentPage
 
     private async void SaveBtn_Clicked(object sender, EventArgs e)
     {
-        if (path != null)
+        try
         {
             using (StreamWriter sw = new StreamWriter(path, true))
             {
@@ -78,10 +78,31 @@ public partial class MainPage : ContentPage
             EIn.Text = string.Empty;
             SaveBtn.BackgroundColor = Colors.Green;
         }
-        else
+        catch
         {
             await DisplayAlert("Chyba!", "Vyberte prosím prvně soubor!", "OK");
-            await OpenFileDialog();
+            OpenBtn_Clicked(sender, e);
+        }
+    }
+
+    
+
+    private async void DeleteBtn_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            using (StreamWriter sw = new StreamWriter(path, false))
+            {
+                sw.WriteLine(EIn.Text);
+            }
+            Read();
+            EIn.Text = string.Empty;
+            SaveBtn.BackgroundColor = Colors.Green;
+        }
+        catch
+        {
+            await DisplayAlert("Chyba!", "Vyberte prosím prvně soubor!", "OK");
+            OpenBtn_Clicked(sender, e);
         }
     }
 }

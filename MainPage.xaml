@@ -42,6 +42,11 @@
                     x:Name="SaveBtn"/>
 
 
+            <Button Text="Delete" 
+                    Clicked="DeleteBtn_Clicked"
+                    HorizontalOptions="Center" 
+                    x:Name="DeleteBtn"/>
+
         </VerticalStackLayout>
     </ScrollView>
 
